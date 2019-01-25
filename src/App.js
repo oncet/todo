@@ -52,7 +52,7 @@ class App extends Component {
           </Grid>
         </Grid>
         <Grid container spacing={8}>
-          {notes.sort((a, b) => (a.id - b.id)).map(note => {
+          {notes.sort((a, b) => (b.id - a.id)).map(note => {
             return (
               <Grid item xs={12} key={note.id}>
                 <Card>
