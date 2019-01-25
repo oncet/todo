@@ -16,7 +16,7 @@ class App extends Component {
     const noteField = document.getElementById('note')
     const noteValue = noteField.value
     this.setState(({notes}) => {
-      notes.push({
+      notes.unshift({
         id: Date.now(),
         value: noteValue.trim()
       })
@@ -52,7 +52,7 @@ class App extends Component {
           </Grid>
         </Grid>
         <Grid container spacing={8}>
-          {notes.sort((a, b) => (b.id - a.id)).map(note => {
+          {notes.map(note => {
             return (
               <Grid item xs={12} key={note.id}>
                 <Card>
