@@ -31,6 +31,11 @@ class App extends Component {
       notes: notes.filter(n => (n.id !== note.id)),
     }))
   }
+  handleKeyPress = ({key}) => {
+    if(key === 'Enter') {
+      this.handleAdd()
+    }
+  }
   render() {
     const {notes} = this.state
     return (
@@ -45,6 +50,7 @@ class App extends Component {
               id="note"
               placeholder="Enter a note..."
               fullWidth
+              onKeyPress={event => this.handleKeyPress(event)}
             ></TextField>
           </Grid>
           <Grid item xs={2} style={{textAlign: 'center'}}>
@@ -52,20 +58,22 @@ class App extends Component {
           </Grid>
         </Grid>
         <Grid container spacing={8}>
-          {notes.map(note => {
-            return (
-              <Grid item xs={12} key={note.id}>
-                <Card>
-                  <CardContent style={{fontFamily: 'Roboto'}}>
-                    {note.value}
-                  </CardContent>
-                  <CardActions>
-                    <IconButton style={{marginLeft: 'auto'}} onClick={() => this.handleDelete(note)} item={note.id}><DeleteIcon /></IconButton>
-                  </CardActions>
-                </Card>
-              </Grid>
-            )
-          })}
+          {notes.length > 0
+            ? notes.map(note => {
+                return (
+                  <Grid item xs={12} key={note.id}>
+                    <Card>
+                      <CardContent style={{fontFamily: 'Roboto'}}>
+                        {note.value}
+                      </CardContent>
+                      <CardActions>
+                        <IconButton style={{marginLeft: 'auto'}} onClick={() => this.handleDelete(note)} item={note.id}><DeleteIcon /></IconButton>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                )
+              })
+            : <p style={{fontFamily: 'Roboto', margin: 'auto', color: 'lightgrey'}}>Nothing to show.</p>}
         </Grid>
       </div>
     )
