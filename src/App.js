@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
+import AddNotes from './Components/AddNote';
+import NotesList from './Components/NotesList';
 
 class App extends Component {
   state = {
@@ -20,21 +14,28 @@ class App extends Component {
         id: Date.now(),
         value: noteValue.trim()
       })
+      notes.filter(note => (note.value !== ""))
+      localStorage.setItem('notes', JSON.stringify(notes))
       return {
-        notes: notes.filter(note => (note.value !== ""))
+        notes: notes
       }
     })
     noteField.value = null
   }
   handleDelete = note => {
-    this.setState(({notes}) => ({
-      notes: notes.filter(n => (n.id !== note.id)),
-    }))
+    this.setState(({notes}) => {
+      const newNotes = notes.filter(n => (n.id !== note.id))
+      localStorage.setItem('notes', JSON.stringify(newNotes))
+      return {
+        notes: newNotes,
+      }
+    })
   }
-  handleKeyPress = ({key}) => {
-    if(key === 'Enter') {
-      this.handleAdd()
-    }
+  componentDidMount() {
+    const notes = JSON.parse(localStorage.getItem('notes'))
+    this.setState({
+      notes: notes? notes : []
+    })
   }
   render() {
     const {notes} = this.state
@@ -44,37 +45,8 @@ class App extends Component {
         marginLeft: 'auto',
         marginRight: 'auto',
       }}>
-        <Grid container spacing={8}>
-          <Grid item xs={10}>
-            <TextField
-              id="note"
-              placeholder="Enter a note..."
-              fullWidth
-              onKeyPress={event => this.handleKeyPress(event)}
-            ></TextField>
-          </Grid>
-          <Grid item xs={2} style={{textAlign: 'center'}}>
-            <IconButton color="primary" onClick={() => this.handleAdd()}><AddIcon /></IconButton>
-          </Grid>
-        </Grid>
-        <Grid container spacing={8}>
-          {notes.length > 0
-            ? notes.map(note => {
-                return (
-                  <Grid item xs={12} key={note.id}>
-                    <Card>
-                      <CardContent style={{fontFamily: 'Roboto'}}>
-                        {note.value}
-                      </CardContent>
-                      <CardActions>
-                        <IconButton style={{marginLeft: 'auto'}} onClick={() => this.handleDelete(note)} item={note.id}><DeleteIcon /></IconButton>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                )
-              })
-            : <p style={{fontFamily: 'Roboto', margin: 'auto', color: 'lightgrey'}}>Nothing to show.</p>}
-        </Grid>
+        <AddNotes handleAdd={this.handleAdd} />
+        <NotesList notes={notes} handleDelete={this.handleDelete} />
       </div>
     )
   }
