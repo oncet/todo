@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddNotes from './Components/AddNote';
+import AddNote from './Components/AddNote';
 import NotesList from './Components/NotesList';
 
 class App extends Component {
@@ -45,7 +45,7 @@ class App extends Component {
         marginLeft: 'auto',
         marginRight: 'auto',
       }}>
-        <AddNotes handleAdd={this.handleAdd} />
+        <AddNote handleAdd={this.handleAdd} />
         <NotesList notes={notes} handleDelete={this.handleDelete} />
       </div>
     )
