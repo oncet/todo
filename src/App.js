@@ -9,6 +9,9 @@ class App extends Component {
   handleAdd = () => {
     const noteField = document.getElementById('note')
     const noteValue = noteField.value
+    if(noteValue.length < 1) {
+      return false;
+    }
     this.setState(({notes}) => {
       notes.unshift({
         id: Date.now(),
