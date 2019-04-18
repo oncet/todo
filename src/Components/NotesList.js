@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import DeleteIcon from '@material-ui/icons/Delete';
+import moment from 'moment'
 
 class NotesList extends Component {
   render() {
@@ -19,6 +20,10 @@ class NotesList extends Component {
                     <Card>
                       <CardContent style={{fontFamily: 'Roboto'}}>
                         {note.value}
+                        <br />
+                        {moment(note.created, 'x').format('L LT')}
+                        <br />
+                        {moment(note.deleted, 'x').format('L LT')}
                       </CardContent>
                       <CardActions>
                         <IconButton style={{marginLeft: 'auto'}} onClick={() => this.props.handleDelete(note)} item={note.id}><DeleteIcon /></IconButton>
