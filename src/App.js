@@ -9,15 +9,12 @@ class App extends Component {
   handleAdd = () => {
     const noteField = document.getElementById('note')
     const noteValue = noteField.value
-    if(noteValue.length < 1) {
-      return false;
-    }
     this.setState(({notes}) => {
       notes.unshift({
         id: Date.now(),
         value: noteValue.trim()
       })
-      notes.filter(note => (note.value !== ""))
+      notes = notes.filter(note => note.value.length > 0)
       localStorage.setItem('notes', JSON.stringify(notes))
       return {
         notes: notes
