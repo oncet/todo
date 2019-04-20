@@ -47,7 +47,7 @@ class App extends Component {
   handleDeleteForever = currentNote => {
     this.setState(({notes}) => {
       const newNotes = notes.filter(note => {
-        return note.id != currentNote.id
+        return note.id !== currentNote.id
       })
       localStorage.setItem('notes', JSON.stringify(newNotes))
       return {
