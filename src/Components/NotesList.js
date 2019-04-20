@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import DeleteIcon from '@material-ui/icons/Delete';
-import moment from 'moment'
+import NoteCard from './NoteCard';
 
 class NotesList extends Component {
   render() {
     const {notes} = this.props
+    notes.sort(this.props.sort)
     return (
       <div>
         <Grid container spacing={8}>
@@ -17,18 +13,7 @@ class NotesList extends Component {
             ? notes.map(note => {
                 return (
                   <Grid item xs={12} key={note.id}>
-                    <Card>
-                      <CardContent style={{fontFamily: 'Roboto'}}>
-                        {note.value}
-                        <br />
-                        {moment(note.created, 'x').format('L LT')}
-                        <br />
-                        {moment(note.deleted, 'x').format('L LT')}
-                      </CardContent>
-                      <CardActions>
-                        <IconButton style={{marginLeft: 'auto'}} onClick={() => this.props.handleDelete(note)} item={note.id}><DeleteIcon /></IconButton>
-                      </CardActions>
-                    </Card>
+                    <NoteCard note={note} handleDelete={this.props.handleDelete} />
                   </Grid>
                 )
               })

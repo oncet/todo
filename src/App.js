@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddNote from './Components/AddNote';
+import AddNoteForm from './Components/AddNoteForm';
 import NotesList from './Components/NotesList';
 import moment from 'moment';
 
@@ -44,6 +44,13 @@ class App extends Component {
       }
     })
   }
+  sort = (a, b) => {
+    if(!a.hasOwnProperty('deleted') && b.hasOwnProperty('deleted')) {
+      return -1
+    } else if(!a.hasOwnProperty('deleted') && !b.hasOwnProperty('deleted')) {
+      return a.created > b.created? -1 : 1
+    }
+  }
   componentDidMount() {
     const notes = JSON.parse(localStorage.getItem('notes'))
     this.setState({
@@ -58,8 +65,8 @@ class App extends Component {
         marginLeft: 'auto',
         marginRight: 'auto',
       }}>
-        <AddNote handleAdd={this.handleAdd} />
-        <NotesList notes={notes} handleDelete={this.handleDelete} />
+        <AddNoteForm handleAdd={this.handleAdd} />
+        <NotesList notes={notes} sort={this.sort} handleDelete={this.handleDelete} />
       </div>
     )
   }

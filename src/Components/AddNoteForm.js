@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 
-class AddNote extends Component {
+class AddNoteForm extends Component {
   handleKeyPress = ({key}) => {
     if(key === 'Enter') {
       this.props.handleAdd()
@@ -34,4 +34,4 @@ class AddNote extends Component {
   }
 }
 
-export default AddNote;
+export default AddNoteForm;
