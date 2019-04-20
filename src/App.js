@@ -44,6 +44,17 @@ class App extends Component {
       }
     })
   }
+  handleDeleteForever = currentNote => {
+    this.setState(({notes}) => {
+      const newNotes = notes.filter(note => {
+        return note.id != currentNote.id
+      })
+      localStorage.setItem('notes', JSON.stringify(newNotes))
+      return {
+        notes: newNotes,
+      }
+    })
+  }
   sort = (a, b) => {
     if(!a.hasOwnProperty('deleted') && b.hasOwnProperty('deleted')) {
       return -1
@@ -66,7 +77,7 @@ class App extends Component {
         marginRight: 'auto',
       }}>
         <AddNoteForm handleAdd={this.handleAdd} />
-        <NotesList notes={notes} sort={this.sort} handleDelete={this.handleDelete} />
+        <NotesList notes={notes} sort={this.sort} handleDelete={this.handleDelete} handleDeleteForever={this.handleDeleteForever} />
       </div>
     )
   }
