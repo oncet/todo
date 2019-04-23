@@ -16,7 +16,6 @@ class App extends Component {
         id: now.format('x'),
         value: noteValue.trim(),
         created: now.format('L LTS'),
-        display: true
       })
       notes = notes.filter(note => note.value.length > 0)
       localStorage.setItem('notes', JSON.stringify(notes))

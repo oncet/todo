@@ -15,7 +15,7 @@ class NotesList extends Component {
             ? notes.map(note => {
                 if (note.deleted) {
                   return (
-                    <Grow in={note.display} key={note.id}>
+                    <Grow in={true} key={note.id}>
                       <Grid item xs={12}>
                         <NoteCardDeleted note={note} handleDelete={this.props.handleDelete} handleDeleteForever={this.props.handleDeleteForever} />
                       </Grid>
@@ -23,7 +23,7 @@ class NotesList extends Component {
                   )
                 }
                 return (
-                  <Grow in={note.display} key={note.id}>
+                  <Grow in={true} key={note.id}>
                     <Grid item xs={12}>
                       <NoteCard note={note} handleDelete={this.props.handleDelete} />
                     </Grid>
