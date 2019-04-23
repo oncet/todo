@@ -11,11 +11,12 @@ class App extends Component {
     const noteField = document.getElementById('note')
     const noteValue = noteField.value
     this.setState(({notes}) => {
-      const now = moment().format('x')
+      const now = moment()
       notes.unshift({
-        id: now,
+        id: now.format('x'),
         value: noteValue.trim(),
-        created: now
+        created: now.format('L LTS'),
+        display: true
       })
       notes = notes.filter(note => note.value.length > 0)
       localStorage.setItem('notes', JSON.stringify(notes))
@@ -34,7 +35,7 @@ class App extends Component {
         else if(note.deleted) {
           delete note.deleted
         } else {
-          note.deleted = moment().format('x')
+          note.deleted = moment().format('L LTS')
         }
         return note
       })
@@ -69,7 +70,7 @@ class App extends Component {
     })
   }
   render() {
-    const {notes} = this.state
+    let {notes} = this.state
     return (
       <div style={{
         maxWidth: '640px',

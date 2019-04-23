@@ -13,8 +13,8 @@ class NoteCard extends Component {
     return (
       <Card>
         <CardContent style={{fontFamily: 'Roboto'}}>
-          <Typography color="textSecondary">
-            {moment(note.created, 'x').from(moment())} ({moment(note.created, 'x').format('L LT')})
+          <Typography style={{overflow: 'hidden'}} color="textSecondary">
+            {moment(note.created, 'L LTS').from(moment())} <span style={{float: 'right'}}>{note.created}</span>
           </Typography>
           {note.value}
         </CardContent>
