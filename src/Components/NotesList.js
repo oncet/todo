@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import NoteCard from './NoteCard';
 import NoteCardDeleted from './NoteCardDeleted';
+import Grow from '@material-ui/core/Grow';
 
 class NotesList extends Component {
   render() {
@@ -14,15 +15,19 @@ class NotesList extends Component {
             ? notes.map(note => {
                 if (note.deleted) {
                   return (
-                    <Grid item xs={12} key={note.id}>
-                      <NoteCardDeleted note={note} handleDelete={this.props.handleDelete} handleDeleteForever={this.props.handleDeleteForever} />
-                    </Grid>
+                    <Grow in={(note.id !== 'undefined')} key={note.id}>
+                      <Grid item xs={12}>
+                        <NoteCardDeleted note={note} handleDelete={this.props.handleDelete} handleDeleteForever={this.props.handleDeleteForever} />
+                      </Grid>
+                    </Grow>
                   )
                 }
                 return (
-                  <Grid item xs={12} key={note.id}>
-                    <NoteCard note={note} handleDelete={this.props.handleDelete} />
-                  </Grid>
+                  <Grow in={(note.id !== 'undefined')} key={note.id}>
+                    <Grid item xs={12}>
+                      <NoteCard note={note} handleDelete={this.props.handleDelete} />
+                    </Grid>
+                  </Grow>
                 )
               })
             : <p style={{fontFamily: 'Roboto', margin: 'auto', color: 'lightgrey'}}>Nothing to show.</p>}
