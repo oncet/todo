@@ -7,15 +7,15 @@ import AddIcon from '@material-ui/icons/Add';
 class AddNoteForm extends Component {
   constructor(props) {
     super(props)
-    this.content_field = React.createRef()
+    this.noteField = React.createRef()
   }
   handleKeyPress = ({key}) => {
     if(key === 'Enter') {
-      this.props.handleAdd(this.content_field.current)
+      this.props.handleAdd(this.noteField.current)
     }
   }
   componentDidMount() {
-    this.content_field.current.focus()
+    this.noteField.current.focus()
   }
   render() {
     return (
@@ -23,14 +23,14 @@ class AddNoteForm extends Component {
         <Grid container spacing={8}>
           <Grid item xs={10}>
             <TextField
-              inputRef={this.content_field}
+              inputRef={this.noteField}
               placeholder="Enter a note..."
               fullWidth
               onKeyPress={event => this.handleKeyPress(event)}
             ></TextField>
           </Grid>
           <Grid item xs={2} style={{textAlign: 'center'}}>
-            <IconButton color="primary" onClick={() => this.props.handleAdd(this.content_field.current)}><AddIcon /></IconButton>
+            <IconButton color="primary" onClick={() => this.props.handleAdd(this.noteField.current)}><AddIcon /></IconButton>
           </Grid>
         </Grid>
       </div>
