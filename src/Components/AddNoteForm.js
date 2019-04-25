@@ -11,7 +11,7 @@ class AddNoteForm extends Component {
   }
   handleKeyPress = ({key}) => {
     if(key === 'Enter') {
-      this.props.handleAdd()
+      this.props.handleAdd(this.content_field.current)
     }
   }
   componentDidMount() {
@@ -30,7 +30,7 @@ class AddNoteForm extends Component {
             ></TextField>
           </Grid>
           <Grid item xs={2} style={{textAlign: 'center'}}>
-            <IconButton color="primary" onClick={() => this.props.handleAdd()}><AddIcon /></IconButton>
+            <IconButton color="primary" onClick={() => this.props.handleAdd(this.content_field.current)}><AddIcon /></IconButton>
           </Grid>
         </Grid>
       </div>

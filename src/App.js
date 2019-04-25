@@ -7,8 +7,7 @@ class App extends Component {
   state = {
     notes: []
   }
-  handleAdd = () => {
-    const noteField = document.getElementById('note')
+  handleAdd = (noteField) => {
     const noteValue = noteField.value
     this.setState(({notes}) => {
       const now = moment()
