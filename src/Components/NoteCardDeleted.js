@@ -15,7 +15,7 @@ class NoteCardDeleted extends Component {
       <Card>
         <CardContent style={{fontFamily: 'Roboto', color: 'grey', textDecoration: 'line-through'}}>
           <Typography color="textSecondary">
-            {moment(note.created, 'L LTS').from(moment())} ({moment(note.created, 'L LTS').format('L LT')})
+            {moment(note.created, 'L LTS').from(moment())} <span style={{float: 'right'}}>{note.created}</span>
           </Typography>
           {note.value}
         </CardContent>
