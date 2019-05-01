@@ -66,6 +66,9 @@ class App extends Component {
     this.setState({
       notes: notes? notes : []
     })
+    window.setInterval(() => {
+      this.setState(this.state)
+    }, 10000)
   }
   render() {
     let {notes} = this.state
